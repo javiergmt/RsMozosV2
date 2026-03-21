@@ -18,7 +18,7 @@ export const COLORS = {
 
   background: "#FFFFFF",
   background2: "#F0F8FF",
-  background3: "#FFFFFF",
+  background3: "#ffffffe4",
   text: "#318ae9",
   text1: "#51a4d7",
   text2: "#7FB7D9",
@@ -29,6 +29,8 @@ export const COLORS = {
   text7: "#1E90FF",
   textdark: "#123F6B",
   textdark1: "#07253F",
+  textnegro: "#01070d",
+  textblanco: "#ffffff",
   inactive: "#A9B4BF",
   itemBackground: "#E6F2FB",
   containerBackground: "#0c366d",

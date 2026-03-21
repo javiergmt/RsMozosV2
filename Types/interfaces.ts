@@ -29,7 +29,7 @@ export type paramMozosType = {
   Nombre: string;
   idPagWeb: number;
   NombreWeb: string;
-  Sector_ini: number;
+  sector_ini: number;
   DescripCub: string;
 };
 
@@ -92,4 +92,59 @@ export type mesasType = {
   SoloOcupada: boolean;
   ConPostre: boolean;
   DescMesa: string;
+};
+
+export type mesaType = {
+  NroMesa: number;
+  idSector: number;
+  Ocupada: string;
+  idMozo: number;
+  Cerrada: number;
+  CantPersonas: number;
+  Activa: boolean;
+  SoloOcupada: boolean;
+  DescMesa: string;
+};
+
+export type mesaEncType = {
+  NroMesa: number;
+  idMozo: number;
+  Fecha: string;
+  Cerrada: number;
+  PorcDesc: number;
+  CantPersonas: number;
+  DescPesos: number;
+  FechaHoraImp: string;
+  idCliente: number;
+  idOcupacion: number;
+  idSector: number;
+  DescMesa: string;
+  Nombre: string;
+};
+
+export type mesaDetType = {
+  NroMesa: number;
+  idPlato: number;
+  idDetalle: number;
+  Cant: number;
+  PcioUnit: number;
+  Importe: number;
+  Descripcion: string;
+  Obs: string;
+  esEntrada: boolean;
+  Cocido: string;
+  idTamanio?: number;
+  DescTam?: string;
+  idSectorExped?: number;
+  //gustos?: gustosDet[];
+  //combos?: comboPostType[];
+  idTipoConsumo: string;
+  ImpCentralizada: number;
+  Detalles: string;
+};
+
+export type gustosDet = {
+  idGusto: number;
+  Descripcion: string;
+  idPlatoRel: number;
 };

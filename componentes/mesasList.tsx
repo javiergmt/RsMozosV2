@@ -5,13 +5,13 @@ import useLoginStore from "@/store/useStore";
 import React, { useMemo } from "react";
 
 import {
-    FlatList,
-    ListRenderItemInfo,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    useWindowDimensions,
-    View,
+  FlatList,
+  ListRenderItemInfo,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
 } from "react-native";
 
 type Props = {
@@ -103,7 +103,9 @@ const MesasList: React.FC<Props> = ({
 
     return (
       <TouchableOpacity
-        onPress={() => onPressMesa?.(m.NroMesa)}
+        onPress={() => {
+          onPressMesa?.(m.NroMesa);
+        }}
         activeOpacity={0.7}
       >
         <View
@@ -156,7 +158,7 @@ const MesasList: React.FC<Props> = ({
 };
 
 const styles = StyleSheet.create({
-  listContainer: { padding: 8 },
+  listContainer: { padding: 1 },
   mesaWrapper: {
     flex: 1 / 3,
     padding: 6,

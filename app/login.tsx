@@ -6,7 +6,7 @@ import { Alert, View } from "react-native";
 
 const Login = () => {
   const router = useRouter();
-  const { Mozo } = useLoginStore();
+  const { Param } = useLoginStore();
   const traerMozo = async (clave: string) => {
     const { data: mozo, isError, isPending } = await validarMozo(clave);
     return mozo;
@@ -15,6 +15,7 @@ const Login = () => {
   const validarClave = async (clave: string) => {
     const mozo = await traerMozo(clave); // Ejemplo de clave válida
     if (mozo.length > 0) {
+      useLoginStore.getState().setUltSector?.(Param[0].sector_ini || 2);
       useLoginStore.getState().setMozo(mozo);
     }
     return mozo.length > 0;

@@ -1,6 +1,7 @@
 import { COLORS } from "@/constants/Colors";
 import { Stack } from "expo-router";
 
+import { SQLiteProvider, type SQLiteDatabase } from "expo-sqlite";
 import { useEffect } from "react";
 import { StatusBar } from "react-native";
 
@@ -19,7 +20,7 @@ const InitialLayout = () => {
   }
 
   return (
-    <>
+    <SQLiteProvider databaseName={"rsmozosv2.db"} onInit={migratedDbIfNeeded}>
       <StatusBar barStyle="light-content" />
       <Stack
         screenOptions={{
@@ -50,9 +51,13 @@ const InitialLayout = () => {
           options={{ headerShown: false, title: "Reservas" }}
         />
       </Stack>
-    </>
+    </SQLiteProvider>
   );
 };
+
+async function migratedDbIfNeeded(db: SQLiteDatabase) {
+  console.log("Checking if DB needs migration...");
+}
 
 export default function RootLayout() {
   return <InitialLayout />;

@@ -1,12 +1,12 @@
 import { sectoresType } from "@/Types/interfaces";
 import React from "react";
 import {
-    FlatList,
-    ListRenderItemInfo,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  FlatList,
+  ListRenderItemInfo,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { COLORS } from "../constants/Colors";
 
@@ -54,7 +54,7 @@ const SectoresList: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 8,
+    paddingHorizontal: 2,
     alignItems: "center",
     backgroundColor: COLORS.background,
   },

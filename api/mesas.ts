@@ -1,4 +1,4 @@
-import { mesasType, sectoresType } from "@/Types/interfaces";
+import { mesasType, mesaType, sectoresType } from "@/Types/interfaces";
 
 export default function general() {
   return null;
@@ -95,6 +95,58 @@ export const getMesas = async (
             }),
           })
         : await fetch(host + `/mesas/${limMesas}/${idSector}`, {
+            method: "GET",
+            headers: new Headers({
+              bd: base,
+            }),
+          });
+
+    const dataJson = await response.json();
+    //console.log("DATA: ", dataJson);
+    isPending = false;
+    return {
+      data: api === "PHP" ? dataJson.data : dataJson,
+      isError,
+      isPending,
+    };
+  } catch (error) {
+    console.log("ERROR: ", error);
+    isError = true;
+  }
+  isPending = false;
+  return { data: [], isError, isPending };
+};
+
+export const getMesa = async (
+  NroMesa: string,
+  sucursal: number,
+): Promise<{
+  data: mesaType[];
+  isError: boolean;
+  isPending: boolean;
+}> => {
+  let isPending = true;
+  let isError = false;
+  let url = apiUrl + "/index.php";
+
+  try {
+    const response =
+      api === "PHP"
+        ? await fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              service: "mesas",
+              method: "mesa",
+              params: {
+                NroMesa: parseInt(NroMesa),
+                Sucursal: sucursal,
+              },
+            }),
+          })
+        : await fetch(host + `/mesas/${NroMesa}/${sucursal}`, {
             method: "GET",
             headers: new Headers({
               bd: base,
