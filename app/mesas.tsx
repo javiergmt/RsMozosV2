@@ -29,6 +29,7 @@ const Mesas = () => {
 
   // Cargo las mesas del Sector
   const handleMesas = (idSector: number | 2) => {
+    console.log("Cargando mesas del sector: ", idSector);
     const load = async () => {
       const { data, isError, isPending } = await getMesas(limMesas, idSector);
       if (!isError) {
@@ -52,6 +53,14 @@ const Mesas = () => {
 
   const handleBuscarMesa = () => {
     const nroMesa = parseInt(text);
+    const mesa = mesas.filter((m) => m.NroMesa === nroMesa)[0];
+    if (!mesa) {
+      Alert.alert(
+        "Mesa no encontrada",
+        `La mesa ${nroMesa} no existe en el sector ${ultSector}`,
+      );
+      return;
+    }
     useLoginStore.getState().setUltMesa?.(nroMesa);
     onChangeText("");
     AbrirMesa(nroMesa);
@@ -72,6 +81,7 @@ const Mesas = () => {
     setIsError(isError);
     return mesa;
   };
+
   const AbrirMesa = (nroMesa: any) => {
     const mesa = mesas.filter((m) => m.NroMesa === nroMesa)[0];
     console.log("Mesa seleccionada: ", mesa);
@@ -119,6 +129,8 @@ const Mesas = () => {
           useLoginStore.getState().setMesa([init]);
           if (Param[0].PedirCubiertos) {
             router.push("/comensales");
+          } else {
+            router.push(`/(tabs)/platos`);
           }
         }
       });
@@ -127,10 +139,12 @@ const Mesas = () => {
 
   useEffect(() => {
     handleMesas(Number(ultSector) || 2);
+    /* Esta comentado, porque al salir con router.push, no se mata el intervalo, y sigue corriendo en segundo plano, lo que genera que al volver a entrar a mesas, se creen nuevos intervalos, y se genere una sobrecarga de consultas a la API
     const interval = setInterval(() => {
       handleMesas(Number(ultSector) || 2);
     }, 20000);
     return () => clearInterval(interval);
+    */
   }, []);
 
   return (
@@ -140,21 +154,26 @@ const Mesas = () => {
       {/* Despliego Barra Superior */}
       <View style={styles.container}>
         <Text style={styles.title}>Mesas</Text>
-        <View style={styles.container_search}></View>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          value={text}
-          placeholder="Mesa.."
-          placeholderTextColor="grey"
-          keyboardType="numeric"
-        />
-        {
-          <TouchableOpacity onPress={() => handleBuscarMesa()}>
-            <Ionicons name="search" size={24} color={COLORS.text} />
-          </TouchableOpacity>
-        }
-        <View />
+        <View style={styles.container_search}>
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangeText}
+            value={text}
+            placeholder="Mesa.."
+            placeholderTextColor="grey"
+            keyboardType="numeric"
+          />
+          {
+            <TouchableOpacity onPress={() => handleBuscarMesa()}>
+              <Ionicons
+                name="search"
+                size={24}
+                color={COLORS.text}
+                style={{ paddingLeft: 5 }}
+              />
+            </TouchableOpacity>
+          }
+        </View>
         <TouchableOpacity onPress={() => router.push("/login")}>
           <Ionicons name="exit-outline" size={24} color={COLORS.text} />
         </TouchableOpacity>
@@ -165,7 +184,7 @@ const Mesas = () => {
         <SectoresList
           Sectores={Sectores}
           ultSector={Number(ultSector)}
-          handleMesas={(idSector: number) => handleMesas(idSector)}
+          handleMesas={handleMesas}
         />
       </View>
 
@@ -234,7 +253,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "bold",
     height: 30,
-    width: "20%",
+    width: 80,
     borderWidth: 1,
     borderColor: COLORS.textdark,
     padding: 5,
@@ -244,8 +263,8 @@ const styles = StyleSheet.create({
     //paddingBottom: 1,
   },
   container_search: {
+    flexDirection: "row",
     alignItems: "flex-start",
     backgroundColor: COLORS.background2,
-    padding: 1,
   },
 });

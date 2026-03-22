@@ -1,6 +1,6 @@
 import { mesasType, mesaType, sectoresType } from "@/Types/interfaces";
 
-export default function general() {
+export default function mesas() {
   return null;
 }
 
@@ -8,7 +8,7 @@ const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 //const api = process.env.EXPO_PUBLIC_API;
 const api = "PHP";
 const base = process.env.EXPO_PUBLIC_BASE || "RestobarW";
-const host = "http://192.168.1.48:1234";
+const host = "http://192.168.50.5:1234";
 
 // Sectores
 export const getSectores = async (
@@ -76,7 +76,7 @@ export const getMesas = async (
   let isPending = true;
   let isError = false;
   let url = apiUrl + "/index.php";
-
+  console.log("sector: ", idSector);
   try {
     const response =
       api === "PHP"
@@ -94,7 +94,7 @@ export const getMesas = async (
               },
             }),
           })
-        : await fetch(host + `/mesas/${limMesas}/${idSector}`, {
+        : await fetch(host + `/mesas/${limMesas}/${idSector}/-1`, {
             method: "GET",
             headers: new Headers({
               bd: base,
@@ -146,7 +146,7 @@ export const getMesa = async (
               },
             }),
           })
-        : await fetch(host + `/mesas/${NroMesa}/${sucursal}`, {
+        : await fetch(host + `/mesa/${NroMesa}/${sucursal}`, {
             method: "GET",
             headers: new Headers({
               bd: base,

@@ -18,7 +18,6 @@ export default function Index() {
 
   const [isPending, setIsPending] = useState(false);
   const [isError, setIsError] = useState(false);
-  //const [paramMozos, setParamMozos] = useState<paramMozosType[]>([]);
 
   // Traigo los parámetros de mozos para usarlos en la app
   const traerParam = async () => {

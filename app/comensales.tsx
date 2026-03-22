@@ -6,7 +6,7 @@ import { View } from "react-native";
 
 const onExit = (value: number) => {
   useLoginStore.getState().setComensales?.(value);
-  router.push("/(tabs)/cuenta");
+  router.push("/(tabs)/platos");
 };
 
 const Comensales = () => {

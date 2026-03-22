@@ -1,3 +1,5 @@
+import { Float } from "react-native/Libraries/Types/CodegenTypes";
+
 export default function interfaces() {
   return null;
 }
@@ -147,4 +149,30 @@ export type gustosDet = {
   idGusto: number;
   Descripcion: string;
   idPlatoRel: number;
+};
+
+export type platosType = {
+  idPlato: number;
+  DescCorta: string;
+  Descripcion: string;
+  Precio: Float;
+  TamanioUnico: boolean;
+  idTipoConsumo: string;
+  idRubro: number;
+  idSubRubro: number;
+  CantGustos: number;
+  CodBarra: string;
+  colorFondo: string;
+  tecla: number;
+  orden: number;
+  shortCut: string;
+  PedirCantAlCargar: boolean;
+  ImpCentralizada: number;
+};
+
+export type platosprecioType = {
+  idPlato: number;
+  PcioUnit: number;
+  idSectorExped: number;
+  ImpCentralizada: number;
 };

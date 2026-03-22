@@ -10,12 +10,6 @@ import {
 } from "react-native";
 import { COLORS } from "../constants/Colors";
 
-type Sector = {
-  idSector: number | string;
-  Descripcion: string;
-  // añadir otras propiedades si existen
-};
-
 type Props = {
   Sectores: sectoresType[];
   ultSector: number | string | null;
@@ -27,7 +21,7 @@ const SectoresList: React.FC<Props> = ({
   ultSector,
   handleMesas,
 }) => {
-  const renderItem = ({ item: s }: ListRenderItemInfo<Sector>) => {
+  const renderItem = ({ item: s }: ListRenderItemInfo<sectoresType>) => {
     const selected = s.idSector === ultSector;
     return (
       <TouchableOpacity onPress={() => handleMesas(Number(s.idSector))}>

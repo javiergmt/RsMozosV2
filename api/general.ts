@@ -7,7 +7,7 @@ const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 //const api = process.env.EXPO_PUBLIC_API;
 const api = "PHP";
 const base = process.env.EXPO_PUBLIC_BASE || "RestobarW";
-const host = "http://192.168.1.48:1234";
+const host = "http://192.168.50.5:1234";
 
 export const getParamMozos = async (): Promise<{
   data: paramMozosType[];
